@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pagina}">Página</title>
+</head>
+<body>
+
+<h2>Bienvenido <span th:text="${usuario}"></span></h2>
+<p>Estás en: <b th:text="${pagina}"></b></p>
+
+<p>
+    <a href="/">Inicio</a> | 
+    <a href="/pagina1">Página 1</a> | 
+    <a href="/pagina2">Página 2</a> |
+    <a href="/logout">Cerrar sesión</a>
+</p>
+
+</body>
+</html>
