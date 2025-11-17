@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Carrito anime</title>
+</head>
+<body>
+<h1>Carrito de compra</h1>
+
+<!-- Mensaje de error si falta stock -->
+<p th:if="${error}" th:text="${error}" style="color:red"></p>
+
+<form action="/carrito/actualizar" method="post">
+    <table border="1">
+        <tr>
+            <th>Producto</th>
+            <th>Stock actual</th>
+            <th>Precio unitario (€)</th>
+            <th>En carrito</th>
+            <th>Subtotal (€)</th>
+        </tr>
+
+        <tr th:each="p : ${stock}">
+            <td th:text="${p.key}"></td>
+            <td th:text="${p.value}"></td>
+            <td th:text="${precios[p.key]}"></td>
+            <td>
+                <input type="number"
+                       th:name="${p.key}"
+                       min="0"
+                       th:value="${carrito[p.key] ?: 0}" />
+            </td>
+            <td th:text="${(carrito[p.key] ?: 0) * precios[p.key]}"></td>
+        </tr>
+
+    </table>
+
+    <button type="submit">Actualizar carrito</button>
+</form>
+
+<h2>Total provisional: <span th:text="${total}"></span> €</h2>
+
+<form action="/carrito/finalizar" method="post">
+    <button type="submit">Finalizar compra</button>
+</form>
+
+<br>
+<a href="/reponedor">Ir a Reponedor</a>
+
+</body>
+</html>
