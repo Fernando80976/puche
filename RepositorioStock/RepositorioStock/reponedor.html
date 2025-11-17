@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reponedor de Stock</title>
+</head>
+<body>
+<h1>Gestión de Stock</h1>
+<p th:if="${mensaje}" th:text="${mensaje}" style="color:green"></p>
+<h2>Stock actual</h2>
+<table border="1">
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad actual</th>
+    </tr>
+    <tr th:each="p : ${stock}">
+        <td th:text="${p.key}"></td>
+        <td th:text="${p.value}"></td>
+    </tr>
+</table>
+<br>
+<h2>Actualizar o agregar producto</h2>
+<form action="/reponedor/actualizar" method="post">
+    <label>Seleccionar producto existente:</label>
+    <select name="productoExistente">
+        <option value="" selected>-- Selecciona --</option>
+        <option th:each="p : ${stock}" th:value="${p.key}" th:text="${p.key}"></option>
+    </select>
+
+    <br><br>
+    <label>O agregar producto nuevo:</label>
+    <input type="text" name="productoNuevo" placeholder="Nombre del producto">
+
+    <br><br>
+    <label>Cantidad:</label>
+    <input type="number" name="cantidad" min="0" required>
+
+    <br><br>
+    <button type="submit">Actualizar / Agregar</button>
+</form>
+
+<br>
+<a href="/carrito">Volver al carrito</a>
+
+</body>
+</html>
